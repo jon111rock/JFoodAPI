@@ -8,7 +8,12 @@ namespace JFoodAPI.Controllers
   [Route("api/products")]
   public class ProductsController :ControllerBase{
     
-    private readonly MockProductRepo _repository=new MockProductRepo();
+    private readonly IProductRepo _repository;
+
+    public ProductsController(IProductRepo repository)
+    {
+        _repository=repository;
+    }
 
     //GET api/pruducts
     [HttpGet]

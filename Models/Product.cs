@@ -17,5 +17,8 @@ namespace JFoodAPI.Models
     [Required]
     [StringLength(500)]
     public string Description { get; set; }
+
+    [Required]
+    public int State { get; set; }
   }
 }

@@ -25,7 +25,13 @@ namespace JFoodAPI.Controllers
     [HttpGet("{id}")]
     public ActionResult <Product> GetProductsById(int id){
 
-      return Ok(_repository.GetProductById(id));
+      var product=_repository.GetProductById(id);
+
+      if(product==null){
+        return NotFound();
+      }
+      
+      return Ok(product);
     }
   }
 }

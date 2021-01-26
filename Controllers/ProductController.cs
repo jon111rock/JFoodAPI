@@ -1,29 +1,39 @@
+using System;
 using System.Collections.Generic;
+using AutoMapper;
 using JFoodAPI.Data;
+using JFoodAPI.Dtos;
 using JFoodAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JFoodAPI.Controllers
 {
   [Route("api/products")]
-  public class ProductsController :ControllerBase{
+  [ApiController]
+  public class ProductsController :ControllerBase
+  {
     
     private readonly IProductRepo _repository;
+    private readonly IMapper _mapper;
 
-    public ProductsController(IProductRepo repository)
+    public ProductsController(IProductRepo repository,IMapper mapper)
     {
         _repository=repository;
+        _mapper=mapper;
     }
 
     //GET api/pruducts
     [HttpGet]
-    public ActionResult <IEnumerable<Product>> GetAllProducts(){
-      return Ok(_repository.GetAllProducts());
+    public ActionResult <IEnumerable<ProductReadDto>> GetAllProducts(){
+
+      var Products=_repository.GetAllProducts();
+
+      return Ok(_mapper.Map<IEnumerable<ProductReadDto>>(Products));
     }
 
     //GET api/products/{id}
-    [HttpGet("{id}")]
-    public ActionResult <Product> GetProductsById(int id){
+    [HttpGet("{id}",Name="GetProductsById")]
+    public ActionResult <ProductReadDto> GetProductsById(int id){
 
       var product=_repository.GetProductById(id);
 
@@ -31,7 +41,22 @@ namespace JFoodAPI.Controllers
         return NotFound();
       }
       
-      return Ok(product);
+      return Ok(_mapper.Map<ProductReadDto>(product));
+    }
+
+    //POST api/products
+    [HttpPost]
+    public ActionResult <ProductReadDto> CreateProduct(ProductCreateDto productCreateDto)
+    {
+
+      var productModel=_mapper.Map<Product>(productCreateDto);
+      _repository.CreateProduct(productModel);
+      _repository.SaveChanges();
+
+      var productReadDto=_mapper.Map<ProductReadDto>(productModel);
+
+      return CreatedAtRoute(nameof(GetProductsById), new {Id=productReadDto.Id}, productReadDto);
+      // return Ok(productModel);
     }
   }
 }

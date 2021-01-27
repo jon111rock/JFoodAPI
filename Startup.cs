@@ -35,8 +35,14 @@ namespace JFoodAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JFoodAPI", Version = "v1" });
             });
-            services.AddScoped<IProductRepo, SqlProductRepo>();
+            services.AddScoped<IProductRepo, SqlProductRepo>();//DI
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //AutoMapper導入
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +55,8 @@ namespace JFoodAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JFoodAPI v1"));
             }
 
+            app.UseCors("MyPolicy");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -59,6 +67,10 @@ namespace JFoodAPI
             {
                 endpoints.MapControllers();
             });
+
+            var origins = Configuration.GetSection("CORS:Origins").Get<string[]>();
+
+
         }
     }
 }

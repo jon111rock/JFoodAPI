@@ -20,5 +20,7 @@ namespace JFoodAPI.Models
 
     [Required]
     public int State { get; set; }
+
+    public string PhotoUrl { get; set; }
   }
 }

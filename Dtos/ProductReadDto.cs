@@ -11,5 +11,7 @@ namespace JFoodAPI.Dtos
     public string Description { get; set; }
 
     public int State { get; set; }
+
+    public string PhotoUrl { get; set; }
   }
 }

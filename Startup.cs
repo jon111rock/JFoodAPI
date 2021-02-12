@@ -36,6 +36,7 @@ namespace JFoodAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JFoodAPI", Version = "v1" });
             });
             services.AddScoped<IProductRepo, SqlProductRepo>();//DI
+            services.AddScoped<IProductTypeRepo, SqlProductTypeRepo>();//DI
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //AutoMapper導入
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

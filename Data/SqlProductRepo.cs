@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using JFoodAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace JFoodAPI.Data{
   public class SqlProductRepo : IProductRepo
@@ -15,7 +16,7 @@ namespace JFoodAPI.Data{
 
     public IEnumerable<Product> GetAllProducts()
     {
-      return _context.Products.ToList();
+      return _context.Products.Include(p=>p.ProductType).ToList();
     }
 
     public Product GetProductById(int id)

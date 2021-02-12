@@ -1,3 +1,5 @@
+using JFoodAPI.Models;
+
 namespace JFoodAPI.Dtos
 {
   public class ProductReadDto
@@ -13,5 +15,8 @@ namespace JFoodAPI.Dtos
     public int State { get; set; }
 
     public string PhotoUrl { get; set; }
+
+    public ProductTypeDto ProductType { get; set; }  
+
   }
 }

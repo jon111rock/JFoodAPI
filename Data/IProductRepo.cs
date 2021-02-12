@@ -10,5 +10,6 @@ namespace JFoodAPI.Data
      IEnumerable<Product> GetAllProducts();
      Product GetProductById(int id);
      void CreateProduct(Product product);
+     void DeleteProduct(int id);
   }
 }

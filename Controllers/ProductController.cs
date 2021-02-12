@@ -74,5 +74,13 @@ namespace JFoodAPI.Controllers
       return NoContent();
     }
     
+    //DELETE api/product/{id}
+    [HttpDelete("{id}")]
+    public ActionResult DeleteProduct(int id)
+    {
+      _repository.DeleteProduct(id);
+      _repository.SaveChanges();
+      return NoContent();
+    }
   }
 }

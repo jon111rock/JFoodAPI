@@ -43,5 +43,14 @@ namespace JFoodAPI.Data{
       return (_context.SaveChanges()>=0);
     }
 
+    public void DeleteProduct(int id)
+    {
+      var productInDb=_context.Products.SingleOrDefault(p=>p.Id == id);
+      if(productInDb==null)
+      {
+        throw new ArgumentNullException(nameof(productInDb));
+      }
+      _context.Products.Remove(productInDb);
+    }
   }
 }

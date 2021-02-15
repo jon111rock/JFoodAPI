@@ -8,5 +8,9 @@ namespace JFoodAPI.Data
      IEnumerable<ProductType> GetAllProductTypes ();
 
      ProductType GetProductTyoe(int Id);
+
+     void CreateProductType(ProductType productType); 
+
+     void SaveChanges();
   }
 }

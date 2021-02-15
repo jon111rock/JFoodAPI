@@ -28,13 +28,27 @@ namespace JFoodAPI.Controllers
     }
 
     //GET api/producttypes/{id}
-    [HttpGet("{id}")]
-    public ActionResult <ProductTypeReadDto> GetProductById(int Id)
+    [HttpGet("{id}",Name="GetProductTypeById")]
+    public ActionResult <ProductTypeReadDto> GetProductTypeById(int Id)
     {
       var productType = _repository.GetProductTyoe(Id);
+      if(productType==null)return NotFound();
 
       return Ok(_mapper.Map<ProductTypeReadDto>(productType));
     }
     
+    //POST api/producttypes 
+    [HttpPost]
+    public ActionResult <ProductTypeReadDto> CreateProductType(ProductTypeCreateDto productTypeCreateDto)
+    {
+      var productType=_mapper.Map<ProductType>(productTypeCreateDto);
+
+      _repository.CreateProductType(productType);
+      _repository.SaveChanges();
+
+      var productTypeReadDto=_mapper.Map<ProductTypeReadDto>(productType);
+
+      return CreatedAtRoute(nameof(GetProductTypeById), new {Id=productTypeReadDto.ProductTypeId}, productTypeReadDto);
+    }
   }
 }

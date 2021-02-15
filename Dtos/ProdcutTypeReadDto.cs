@@ -1,11 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace JFoodAPI.Models{
-  public class ProductTypeDto{
+  public class ProductTypeReadDto{
     
-    public int Id { get; set; }  
+    public int ProductTypeId { get; set; }
 
-    public string Name { get; set; }
+    public string Name { get; set; }  
 
     public int State { get; set; }
 

@@ -11,6 +11,8 @@ namespace JFoodAPI.Data
 
      void CreateProductType(ProductType productType); 
 
+     void DeleteProductType(int Id);
+     
      void SaveChanges();
   }
 }

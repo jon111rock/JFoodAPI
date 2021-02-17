@@ -36,9 +36,20 @@ namespace JFoodAPI.Data
       _context.ProductTypes.Add(productType);
     }
 
+    public void DeleteProductType(int Id)
+    {
+      var productTypeInDb = _context.ProductTypes.SingleOrDefault(p=> p.ProductTypeId==Id);
+      if(productTypeInDb== null)
+      {
+        throw new ArgumentNullException(nameof(productTypeInDb));
+      }
+      _context.ProductTypes.Remove(productTypeInDb);
+    }
+
     public void SaveChanges()
     {
       _context.SaveChanges();
     }
+
   }
 }

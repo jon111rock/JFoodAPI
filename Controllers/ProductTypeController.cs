@@ -50,5 +50,21 @@ namespace JFoodAPI.Controllers
 
       return CreatedAtRoute(nameof(GetProductTypeById), new {Id=productTypeReadDto.ProductTypeId}, productTypeReadDto);
     }
+
+    //PUT api/producttypes/{id}
+    [HttpPut("{id}")]
+    public ActionResult UpdateProductType(ProductTypeUpdateDto productTypeUpdateDto,int id)
+    {
+      var productTypeInDb=_repository.GetProductTyoe(id);
+      if(productTypeInDb==null)
+      {
+        return NoContent();
+      }
+
+      _mapper.Map(productTypeUpdateDto, productTypeInDb);
+      _repository.SaveChanges();
+
+      return NoContent();
+    }
   }
 }

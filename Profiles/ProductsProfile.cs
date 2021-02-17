@@ -21,8 +21,8 @@ namespace JFoodAPI.Profiles
         
         CreateMap<ProductTypeCreateDto,ProductType>();
         CreateMap<ProductType,ProductTypeCreateDto>();
-        // CreateMap<ProductTypeCreateDto,ProductTypeReadDto>();
-        // CreateMap<ProductTypeReadDto,ProductTypeReadDto>();
+
+        CreateMap<ProductTypeUpdateDto, ProductType>();
     }
   }
 }

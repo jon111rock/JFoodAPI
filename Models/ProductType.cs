@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace JFoodAPI.Models
 {
   public class ProductType
@@ -7,5 +9,6 @@ namespace JFoodAPI.Models
     public string Name { get; set; }  
 
     public int State { get; set; }
+
   }
 }

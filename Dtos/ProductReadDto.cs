@@ -16,7 +16,9 @@ namespace JFoodAPI.Dtos
 
     public string PhotoUrl { get; set; }
 
-    public ProductTypeReadDto ProductType { get; set; }  
+    // public ProductTypeReadDto ProductType { get; set; }  
+
+    public string ProductTypeId { get; set; }
 
   }
 }
